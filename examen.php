@@ -259,7 +259,7 @@ function atmosferaAfectada($mapaDanyosTotales) {
 //Recaudación total esperada
 function recaudacion($totalAtmosfera, $totalAtmosferaAfectada) {
     $TOTAL_PECES = 1000000;
-    $totalPeces = ($totalAtmosferaAfectada / $totalAtmosfera) * $TOTAL_PECES;
+    $totalPeces = ($totalAtmosferaAfectada * $TOTAL_PECES) / $totalAtmosfera ;
     $PRECIO_PECES = 7;
     $recaudacion = $totalPeces * $PRECIO_PECES;
     return $recaudacion;
