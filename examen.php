@@ -189,7 +189,8 @@ function cabrasAfectadas($quesificacion) {
             }
         }
     }
-    return $contadorQ * 3000;
+    $CABRAS_POR_ZONA = 3000;
+    return $contadorQ * $CABRAS_POR_ZONA;
 }
     
 //Mapa de daños totales
@@ -222,8 +223,10 @@ function estimacionCostes($mapaDanyosTotales) {
             }
         }
     }
-    $costeCorrales = $contadorQ * 250000;
-    $costeRocas = $contadorX * 75000;
+    $REPARAR_CORRAL = 250000;
+    $costeCorrales = $contadorQ * $REPARAR_CORRAL;
+    $REPARAR_ROCAS = 75000;
+    $costeRocas = $contadorX * $REPARAR_ROCAS;
     $costeTotal = $costeCorrales + $costeRocas;
     return $costeTotal;
 }
@@ -255,10 +258,13 @@ function atmosferaAfectada($mapaDanyosTotales) {
 
 //Recaudación total esperada
 function recaudacion($totalAtmosfera, $totalAtmosferaAfectada) {
-    $totalPeces = ($totalAtmosferaAfectada / $totalAtmosfera) * 1000000;
-    $recaudacion = $totalPeces * 7;
+    $TOTAL_PECES = 1000000;
+    $totalPeces = ($totalAtmosferaAfectada / $totalAtmosfera) * $TOTAL_PECES;
+    $PRECIO_PECES = 7;
+    $recaudacion = $totalPeces * $PRECIO_PECES;
     return $recaudacion;
 }
+
 
 // =========================================
 // ESCRIBE AQUÍ TU PROGRAMA PRINCIPAL
@@ -270,13 +276,14 @@ mostrarMapa($capraMajoris);
 
 //Zonas habitadas afectadas
 echo "<br><br>Mapa quesificado:";
-$quesificacion = quesificacion($capraMajoris, $impacts);
-mostrarMapa($quesificacion);
+$mapaQuesificado = quesificacion($capraMajoris, $impacts);
+mostrarMapa($mapaQuesificado);
 
 //Población afectada y consumo de desodorante espacial
-$cabrasAfectadas = cabrasAfectadas($quesificacion);
+$cabrasAfectadas = cabrasAfectadas($mapaQuesificado);
 echo "<br><br>Cabras afectadas: $cabrasAfectadas";
-$desodorante = ($cabrasAfectadas * 10) / 1000;
+$DESODORANTE_POR_CABRA = 0.01;
+$desodorante = ($cabrasAfectadas * $DESODORANTE_POR_CABRA);
 echo "<br>Litros de desodorante	anticheddar: $desodorante". "L";
 
 //Mapa de daños totales
@@ -298,6 +305,6 @@ $totalAtmosferaAfectada = atmosferaAfectada($mapaDanyosTotales);
 $recaudacion = recaudacion($totalAtmosfera, $totalAtmosferaAfectada);
 echo "<br><br>Recaudación ONG Cocineros Cósmicos: " . round($recaudacion) . "€";
 $diferencia = $costeDanyos - $recaudacion;
-echo "<br>Daños	netos estimados: " . round($diferencia) . "€";
+echo "<br>Daños netos estimados: " . round($diferencia) . "€";
 
 ?>
